@@ -31,13 +31,13 @@ Vibe-coded websites all look the same:
 ## Install / インストール
 
 ```bash
-npm install -g de-ai
+npm install -g @de-ai/cli
 ```
 
 Or use without installing / インストールなしで使う:
 
 ```bash
-npx de-ai ./src
+npx @de-ai/cli ./src
 ```
 
 ---
@@ -46,23 +46,23 @@ npx de-ai ./src
 
 ### Analyze static files (HTML, CSS)
 ```bash
-de-ai ./src
+npx @de-ai/cli ./src
 ```
 
 ### Analyze all file types (JSX, TSX, Vue, Svelte, etc.)
 ```bash
-de-ai ./src --all
+npx @de-ai/cli ./src --all
 ```
 
 ### Generate fix suggestions with OpenAI
 ```bash
 export OPENAI_API_KEY=your-key
-de-ai ./src --fix
+npx @de-ai/cli ./src --fix
 ```
 
 ### Combine options
 ```bash
-de-ai ./src --all --fix
+npx @de-ai/cli ./src --all --fix
 ```
 
 ---
@@ -107,9 +107,21 @@ Load `skill.md` into Claude Code to prevent AI-like patterns from being generate
 `skill.md` をClaude Codeに読み込むと、最初からAIらしいパターンが生成されなくなります。
 
 ```bash
-# In your project, add to CLAUDE.md:
+# 1. Install the package
+npm install --save-dev @de-ai/cli
+
+# 2. Add to your project's CLAUDE.md:
 # プロジェクトのCLAUDE.mdに追加:
-@de-ai/skill.md
+@node_modules/@de-ai/cli/skill.md
+```
+
+Or copy `skill.md` directly into your project and reference it:
+
+またはリポジトリから `skill.md` を直接ダウンロードして参照することもできます：
+
+```bash
+curl -o de-ai-skill.md https://raw.githubusercontent.com/shimayu0701/de-ai/main/skill.md
+# Then add to CLAUDE.md: @de-ai-skill.md
 ```
 
 The skill covers: / スキルのカバー範囲:
