@@ -1,9 +1,9 @@
 {
-  "name": "de-ai",
+  "name": "@de-ai/cli",
   "version": "0.1.0",
   "description": "Remove AI-generated look from websites. Restore human touch. / AIらしさを除去して、人間らしいウェブを取り戻す。",
   "bin": {
-    "de-ai": "./dist/index.js"
+    "de-ai": "dist/index.js"
   },
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
@@ -11,8 +11,35 @@
     "start": "node dist/index.js",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["ai", "design", "css", "html", "japanese", "web-design", "refactor"],
+  "files": [
+    "dist/",
+    "rules/",
+    "skill.md",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "design",
+    "css",
+    "html",
+    "japanese",
+    "web-design",
+    "refactor",
+    "de-ai",
+    "vibe-coding"
+  ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shimayu0701/de-ai.git"
+  },
+  "homepage": "https://github.com/shimayu0701/de-ai#readme",
+  "bugs": {
+    "url": "https://github.com/shimayu0701/de-ai/issues"
+  },
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
