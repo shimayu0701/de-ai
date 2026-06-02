@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "description": "Japanese web design principles as alternatives to AI-generic patterns",
+  "principles": [
+    {
+      "id": "jp-information-density",
+      "title_en": "Information Density",
+      "title_ja": "情報密度",
+      "description_en": "Japanese web design traditionally packs more content per screen. Generous whitespace reads as 'unfinished' in many Japanese contexts.",
+      "description_ja": "日本のウェブデザインは伝統的に情報密度が高い。過剰な余白は「未完成」に見えることがある。",
+      "guidance_en": "Don't remove content to add whitespace. Instead, structure content with clear typographic hierarchy.",
+      "guidance_ja": "余白のためにコンテンツを削らない。タイポグラフィの階層で構造を示す。"
+    },
+    {
+      "id": "jp-typography-mixing",
+      "title_en": "Typeface Mixing",
+      "title_ja": "書体の使い分け",
+      "description_en": "Japanese design often mixes mincho (serif) for body and gothic (sans-serif) for headings, or vice versa. This creates intentional contrast absent in AI defaults.",
+      "description_ja": "見出しにゴシック体、本文に明朝体（またはその逆）を使い分けることで、意図的なコントラストが生まれる。",
+      "font_stacks": {
+        "gothic": "'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif",
+        "mincho": "'Yu Mincho', 'Hiragino Mincho ProN', 'Noto Serif JP', serif",
+        "rounded": "'Hiragino Maru Gothic ProN', 'M PLUS Rounded 1c', sans-serif"
+      }
+    },
+    {
+      "id": "jp-color-restrained",
+      "title_en": "Restrained Color Usage",
+      "title_ja": "抑制されたカラー使用",
+      "description_en": "Many trusted Japanese sites use white/light gray backgrounds with a single accent color, often applied sparingly to borders and key actions only.",
+      "description_ja": "信頼感のある日本サイトは白・薄グレー背景に1色のアクセントを使い、ボーダーや主要アクションにのみ控えめに適用していることが多い。",
+      "palette_examples": [
+        { "name": "新聞スタイル", "bg": "#FFFFFF", "text": "#1A1A1A", "accent": "#C00000", "border": "#DDDDDD" },
+        { "name": "企業スタイル", "bg": "#F8F8F8", "text": "#222222", "accent": "#003A8C", "border": "#E0E0E0" },
+        { "name": "伝統スタイル", "bg": "#FAFAF5", "text": "#2C2C2C", "accent": "#8B4513", "border": "#D4C5A9" }
+      ]
+    },
+    {
+      "id": "jp-sharp-edges",
+      "title_en": "Sharp Edges and Borders",
+      "title_ja": "シャープなエッジとボーダー",
+      "description_en": "Japanese UI design frequently uses sharp corners and 1px borders to define structure, rather than rounded cards with shadows.",
+      "description_ja": "日本のUIデザインは丸みのあるカード＋シャドウより、シャープな角と1pxボーダーで構造を定義することが多い。",
+      "css_example": "border: 1px solid #DDDDDD; /* Not: rounded-2xl shadow-xl */"
+    },
+    {
+      "id": "jp-table-layout",
+      "title_en": "Table and List Layouts",
+      "title_ja": "表・リスト形式のレイアウト",
+      "description_en": "Where Western AI defaults to icon-card grids, Japanese sites often use HTML tables, definition lists, or bordered list items to present comparable features.",
+      "description_ja": "欧米AIがアイコンカードグリッドを多用する場面で、日本サイトはHTMLテーブル・定義リスト・ボーダー付きリストを使うことが多い。",
+      "guidance_en": "Prefer <table> or <dl> for structured comparisons. It signals precision.",
+      "guidance_ja": "構造的な比較には<table>や<dl>を優先。精密さを示す。"
+    },
+    {
+      "id": "jp-asymmetric-layout",
+      "title_en": "Asymmetric Layout",
+      "title_ja": "非対称レイアウト",
+      "description_en": "Japanese editorial design often uses asymmetric column ratios (e.g., 2:8 or 3:7) rather than equal-width columns, clearly distinguishing main content from navigation.",
+      "description_ja": "日本の編集デザインは均等カラムより非対称（2:8、3:7など）を好む。本文とナビゲーションを明確に区別する。",
+      "css_example": "grid-template-columns: 200px 1fr; /* Not: grid-cols-3 */"
+    },
+    {
+      "id": "jp-motion-restrained",
+      "title_en": "Restrained Motion",
+      "title_ja": "控えめなモーション",
+      "description_en": "Avoid scroll-triggered animations and parallax effects common in AI sites. Japanese corporate sites favor static, immediately readable layouts.",
+      "description_ja": "AIサイトにありがちなスクロールトリガーアニメーションやパララックスは避ける。静的ですぐ読めるレイアウトを重視する。",
+      "guidance_en": "If animation is needed, limit to 150-200ms transitions on interactive elements only",
+      "guidance_ja": "アニメーションが必要な場合はインタラクティブ要素のみ、150〜200msのトランジションに限定"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "version": "1.1.0",
+  "description": "Patterns that indicate AI-generated (generic) web design",
+  "matchTypes": {
+    "substring": "Simple string contains match (default)",
+    "word": "Whole-word match using \\b boundaries",
+    "regex": "Full regular expression match"
+  },
+  "categories": {
+    "colors": {
+      "description": "Overused AI color choices",
+      "patterns": [
+        {
+          "id": "color-purple-gradient-tailwind",
+          "severity": "high",
+          "matchType": "substring",
+          "match": ["from-purple-", "from-violet-", "to-indigo-"],
+          "description_en": "Purple-to-blue gradient via Tailwind — the most common AI hero pattern",
+          "description_ja": "Tailwindの紫→青グラジェント — AIサイトの代名詞",
+          "suggestion_en": "Use a flat single color or subtle border-bottom instead",
+          "suggestion_ja": "フラットな単色、または控えめなborder-bottomに変更"
+        },
+        {
+          "id": "color-purple-gradient-css",
+          "severity": "high",
+          "matchType": "regex",
+          "match": ["linear-gradient\\(to (right|left|bottom|top),?\\s*#?[7-9][a-f0-9]{5}", "linear-gradient\\(to (right|left|bottom|top),?\\s*rgb"],
+          "description_en": "CSS linear-gradient on hero element",
+          "description_ja": "CSSのlinear-gradientをヒーロー要素に使用",
+          "suggestion_en": "Replace with a flat background color and a bottom border",
+          "suggestion_ja": "フラットな背景色＋border-bottomに置き換える"
+        },
+        {
+          "id": "color-indigo-primary",
+          "severity": "medium",
+          "matchType": "substring",
+          "match": ["bg-indigo-600", "bg-purple-600", "text-indigo-600", "text-purple-600"],
+          "description_en": "Indigo/purple as primary action color",
+          "description_ja": "インディゴ・紫をプライマリカラーにしている",
+          "suggestion_en": "Consider a brand-specific color or neutral tones",
+          "suggestion_ja": "ブランド固有の色、またはニュートラルトーンに変更"
+        }
+      ]
+    },
+    "layout": {
+      "description": "Repetitive AI layout patterns",
+      "patterns": [
+        {
+          "id": "layout-3col-equal-tailwind",
+          "severity": "high",
+          "matchType": "substring",
+          "match": ["grid-cols-3", "md:grid-cols-3", "lg:grid-cols-3"],
+          "description_en": "3-column equal-width card grid — extremely common in AI output",
+          "description_ja": "3カラム均等カードグリッド — AIが最もよく生成するレイアウト",
+          "suggestion_en": "Try asymmetric 2-column or list-based layout with clear hierarchy",
+          "suggestion_ja": "非対称2カラム、または主副の情報階層が明確なリスト形式に変更"
+        },
+        {
+          "id": "layout-3col-equal-css",
+          "severity": "high",
+          "matchType": "regex",
+          "match": ["repeat\\(3,\\s*(1fr|minmax)"],
+          "description_en": "CSS 3-column equal grid",
+          "description_ja": "CSSの3カラム均等グリッド",
+          "suggestion_en": "Try an asymmetric ratio like 200px 1fr, or a list layout",
+          "suggestion_ja": "200px 1fr などの非対称比率か、リスト形式に変更"
+        },
+        {
+          "id": "layout-hero-center",
+          "severity": "low",
+          "matchType": "regex",
+          "match": ["class=\"[^\"]*\\btext-center\\b[^\"]*hero", "class=\"[^\"]*\\bhero\\b[^\"]*text-center"],
+          "description_en": "Centered text inside a hero section",
+          "description_ja": "ヒーローセクション内のセンタリング",
+          "suggestion_en": "Left-aligned content feels more editorial and intentional",
+          "suggestion_ja": "左揃えのコンテンツの方が編集意図が伝わりやすい"
+        }
+      ]
+    },
+    "typography": {
+      "description": "Typography choices that signal AI generation",
+      "patterns": [
+        {
+          "id": "font-inter-only",
+          "severity": "medium",
+          "matchType": "regex",
+          "match": ["font-family:\\s*['\"]?Inter['\"]?\\s*,\\s*sans-serif", "fonts\\.googleapis\\.com.*Inter", "font-inter(?![a-z])"],
+          "description_en": "Inter as the only typeface",
+          "description_ja": "Interフォント一択",
+          "suggestion_en": "Mix with a serif, or use Yu Gothic / Hiragino for Japanese content",
+          "suggestion_ja": "セリフ体との混在、または游ゴシック・源ノ角ゴシックなど日本語フォントスタックを使用"
+        },
+        {
+          "id": "text-gradient-clip-tailwind",
+          "severity": "high",
+          "matchType": "substring",
+          "match": ["bg-clip-text"],
+          "description_en": "Gradient clip-text on heading",
+          "description_ja": "見出しへのグラジェントテキスト（Tailwind）",
+          "suggestion_en": "Plain bold text with high contrast is more trustworthy",
+          "suggestion_ja": "コントラストの高いシンプルな太字の方が信頼感がある"
+        },
+        {
+          "id": "text-gradient-clip-css",
+          "severity": "high",
+          "matchType": "regex",
+          "match": ["background-clip:\\s*text", "-webkit-background-clip:\\s*text"],
+          "description_en": "CSS gradient clip-text effect on heading",
+          "description_ja": "CSSのグラジェントクリップテキスト",
+          "suggestion_en": "Plain bold text with high contrast is more trustworthy",
+          "suggestion_ja": "コントラストの高いシンプルな太字の方が信頼感がある"
+        },
+        {
+          "id": "text-huge-hero",
+          "severity": "low",
+          "matchType": "regex",
+          "match": ["\\btext-[6-9]xl\\b", "font-size:\\s*[5-9]rem"],
+          "description_en": "Excessively large hero headline",
+          "description_ja": "過剰に大きなヒーロー見出し",
+          "suggestion_en": "text-4xl or text-5xl is sufficient; let content speak",
+          "suggestion_ja": "text-4xl〜5xl程度で十分。コンテンツ自体を語らせる"
+        }
+      ]
+    },
+    "components": {
+      "description": "Overused UI component patterns",
+      "patterns": [
+        {
+          "id": "component-glass-tailwind",
+          "severity": "high",
+          "matchType": "substring",
+          "match": ["backdrop-blur", "bg-white/10", "bg-black/10", "bg-white/20", "bg-white/5"],
+          "description_en": "Glassmorphism via Tailwind",
+          "description_ja": "Tailwindによるガラスモーフィズム",
+          "suggestion_en": "Solid backgrounds with a subtle border are more readable",
+          "suggestion_ja": "ソリッドな背景色＋細いボーダーの方が読みやすい"
+        },
+        {
+          "id": "component-glass-css",
+          "severity": "high",
+          "matchType": "regex",
+          "match": ["backdrop-filter:\\s*blur", "-webkit-backdrop-filter:\\s*blur"],
+          "description_en": "Glassmorphism via CSS backdrop-filter",
+          "description_ja": "CSSのbackdrop-filterによるガラスモーフィズム",
+          "suggestion_en": "Solid backgrounds with a subtle border are more readable",
+          "suggestion_ja": "ソリッドな背景色＋細いボーダーの方が読みやすい"
+        },
+        {
+          "id": "component-rounded-xl",
+          "severity": "medium",
+          "matchType": "regex",
+          "match": ["\\brounded-(2xl|3xl|full)\\b", "border-radius:\\s*[2-9]\\d*rem", "border-radius:\\s*[1-9]\\d+px(?!\\s*0)", "border-radius:\\s*9999px"],
+          "description_en": "Excessively rounded corners",
+          "description_ja": "過剰な角丸",
+          "suggestion_en": "rounded or rounded-md; sharp edges feel more intentional",
+          "suggestion_ja": "rounded〜rounded-md程度。シャープな角の方が意図的に見える"
+        },
+        {
+          "id": "component-shadow-xl",
+          "severity": "medium",
+          "matchType": "regex",
+          "match": ["\\bshadow-(xl|2xl)\\b", "box-shadow:\\s*0\\s+[1-9]\\d*px\\s+[3-9]\\d*px"],
+          "description_en": "Heavy drop shadows on cards",
+          "description_ja": "カードへの過剰なドロップシャドウ",
+          "suggestion_en": "shadow-sm or border instead; flat design reads as more confident",
+          "suggestion_ja": "shadow-sm、またはborderのみ。フラットな方が自信を感じさせる"
+        },
+        {
+          "id": "component-cta-generic",
+          "severity": "high",
+          "matchType": "word",
+          "match": ["Get Started", "Learn More", "Try for Free", "Start Now", "Sign Up Free", "Get Started Free"],
+          "description_en": "Generic English CTA text",
+          "description_ja": "英語の汎用CTAテキスト",
+          "suggestion_en": "Use specific, action-oriented text describing what happens next",
+          "suggestion_ja": "次に何が起きるかを具体的に示すテキストに変更（例：「無料で試す」より「3分で設定完了」）"
+        }
+      ]
+    },
+    "structure": {
+      "description": "Page structure patterns common in AI-generated sites",
+      "patterns": [
+        {
+          "id": "structure-social-proof",
+          "severity": "low",
+          "matchType": "regex",
+          "match": ["trusted by", "as seen in", "class=\"[^\"]*\\blogos\\b", "id=\"[^\"]*\\blogos\\b"],
+          "description_en": "Generic 'trusted by X companies' logo bar",
+          "description_ja": "汎用的な「X社が信頼」ロゴ羅列セクション",
+          "suggestion_en": "Replace with a specific testimonial or case study",
+          "suggestion_ja": "具体的な事例・証言に置き換える"
+        },
+        {
+          "id": "structure-faq-accordion",
+          "severity": "low",
+          "matchType": "regex",
+          "match": ["\\bfaq\\b", "\\baccordion\\b", "frequently asked"],
+          "description_en": "Generic FAQ accordion section",
+          "description_ja": "汎用的なFAQアコーディオン",
+          "suggestion_en": "Integrate answers into the relevant page sections instead",
+          "suggestion_ja": "回答を関連するページセクションに組み込む"
+        }
+      ]
+    }
+  }
+}

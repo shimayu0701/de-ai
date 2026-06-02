@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Before (AI-generated look)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f0f1a;
+      color: #ffffff;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+    .nav-cta {
+      background: linear-gradient(to right, #7c3aed, #2563eb);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 8rem 3rem 6rem;
+      text-align: center;
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e3a5f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(124,58,237,0.2);
+      border: 1px solid rgba(124,58,237,0.5);
+      color: #a78bfa;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #ffffff, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; }
+    .btn-primary {
+      background: linear-gradient(to right, #7c3aed, #2563eb);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(124,58,237,0.4);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 4rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: 0.875rem; color: rgba(255,255,255,0.5); margin-top: 0.25rem; }
+
+    /* Logos */
+    .logos-section {
+      padding: 3rem;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+    }
+    .logos-section p { color: rgba(255,255,255,0.4); font-size: 0.875rem; margin-bottom: 2rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .logos { display: flex; justify-content: center; gap: 3rem; align-items: center; flex-wrap: wrap; }
+    .logo-item { color: rgba(255,255,255,0.2); font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; }
+
+    /* Features */
+    .features {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      text-align: center;
+      color: #a78bfa;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.75rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #ffffff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 3.5rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(37,99,235,0.3));
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6; }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.15));
+      margin: 4rem 3rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(124,58,237,0.3);
+    }
+    .cta-section h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #ffffff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-section p { color: rgba(255,255,255,0.6); margin-bottom: 2rem; font-size: 1.1rem; }
+
+    /* Footer */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.875rem;
+    }
+
+    /* Badge */
+    .ai-badge {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #fca5a5;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">TaskFlow</div>
+    <ul class="nav-links">
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <button class="nav-cta">Get Started</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">✦ Now in Public Beta</div>
+    <h1>Manage your team,<br>without the chaos</h1>
+    <p>The most powerful project management platform for modern teams. Ship faster, collaborate better, stay in sync.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">Get Started Free</button>
+      <button class="btn-secondary">Learn More</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Active Teams</div>
+      </div>
+      <div>
+        <div class="stat-number">99.9%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+      <div>
+        <div class="stat-number">4.9★</div>
+        <div class="stat-label">App Store</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="logos-section">
+    <p>Trusted by teams at</p>
+    <div class="logos">
+      <div class="logo-item">ACME</div>
+      <div class="logo-item">GLOBEX</div>
+      <div class="logo-item">INITECH</div>
+      <div class="logo-item">UMBRELLA</div>
+      <div class="logo-item">WAYNE CO</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need<br>to ship faster</h2>
+    <p class="section-subtitle">Powerful tools that help your team stay aligned and move quickly.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Smart Boards</h3>
+        <p>Visualize your work with intelligent kanban boards that adapt to your workflow automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Automation</h3>
+        <p>Eliminate repetitive tasks with powerful no-code automations that run 24/7 in the background.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Analytics</h3>
+        <p>Get deep insights into your team's performance with beautiful real-time dashboards and reports.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Integrations</h3>
+        <p>Connect with 100+ tools your team already uses. Slack, GitHub, Figma, and more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Security</h3>
+        <p>Enterprise-grade security with SSO, 2FA, and audit logs. Your data is always protected.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Global</h3>
+        <p>Work across timezones with async-first features designed for distributed teams worldwide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to get started?</h2>
+    <p>Join 50,000+ teams already using TaskFlow. No credit card required.</p>
+    <button class="btn-primary">Start Free Trial</button>
+  </section>
+
+  <footer>
+    <div>© 2026 TaskFlow Inc.</div>
+    <div>Privacy · Terms · Contact</div>
+  </footer>
+
+  <div class="ai-badge">⚠ Before: AI-generated look</div>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>de-ai — Before / After Comparison</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+
+    header {
+      background: #1a1a1a;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { font-size: 1rem; font-weight: 700; letter-spacing: 0.05em; }
+    header p { font-size: 0.8125rem; color: #888; }
+
+    .tabs {
+      display: flex;
+      background: #e0e0e0;
+      border-bottom: 1px solid #ccc;
+    }
+    .tab {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      color: #555;
+      border-bottom: 2px solid transparent;
+    }
+    .tab.active {
+      background: white;
+      color: #1a1a1a;
+      border-bottom: 2px solid #1a1a1a;
+    }
+
+    /* Side by side */
+    .split-view {
+      display: none;
+      height: calc(100vh - 100px);
+    }
+    .split-view.active { display: grid; grid-template-columns: 1fr 1fr; }
+    .pane { position: relative; }
+    .pane-label {
+      position: absolute;
+      top: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .pane-label.before {
+      background: rgba(239,68,68,0.9);
+      color: white;
+    }
+    .pane-label.after {
+      background: rgba(0,58,140,0.9);
+      color: white;
+    }
+    .pane iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-right: 1px solid #ccc;
+    }
+
+    /* Single view */
+    .single-view {
+      display: none;
+      height: calc(100vh - 100px);
+    }
+    .single-view.active { display: block; }
+    .single-view iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Diff list */
+    .diff-view {
+      display: none;
+      padding: 2rem;
+      overflow-y: auto;
+      height: calc(100vh - 100px);
+      background: white;
+    }
+    .diff-view.active { display: block; }
+    .diff-view h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .diff-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .diff-table th {
+      text-align: left;
+      padding: 0.6rem 1rem;
+      background: #f8f8f8;
+      border: 1px solid #e0e0e0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: 0.06em;
+    }
+    .diff-table td {
+      padding: 0.875rem 1rem;
+      border: 1px solid #e0e0e0;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .diff-table tr:nth-child(even) td { background: #fafafa; }
+    .before-cell { color: #c00000; }
+    .after-cell { color: #003a8c; }
+    .severity-high { color: #c00000; font-weight: 700; font-size: 0.75rem; }
+    .severity-med  { color: #c07000; font-weight: 700; font-size: 0.75rem; }
+    .severity-low  { color: #888; font-weight: 700; font-size: 0.75rem; }
+    code {
+      font-family: 'Menlo', 'Consolas', monospace;
+      font-size: 0.8125rem;
+      background: #f0f0f0;
+      padding: 0.1rem 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>de-ai — Before / After Comparison</h1>
+    <p>Same product. Same content. Different design intent.</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="show('split')">← Before | After →</button>
+    <button class="tab" onclick="show('before')">Before のみ</button>
+    <button class="tab" onclick="show('after')">After のみ</button>
+    <button class="tab" onclick="show('diff')">変更点一覧</button>
+  </div>
+
+  <div class="split-view active" id="view-split">
+    <div class="pane">
+      <span class="pane-label before">⚠ Before: AI-generated</span>
+      <iframe src="before.html" title="Before"></iframe>
+    </div>
+    <div class="pane">
+      <span class="pane-label after">✓ After: de-ai applied</span>
+      <iframe src="after.html" title="After"></iframe>
+    </div>
+  </div>
+
+  <div class="single-view" id="view-before">
+    <iframe src="before.html" title="Before"></iframe>
+  </div>
+
+  <div class="single-view" id="view-after">
+    <iframe src="after.html" title="After"></iframe>
+  </div>
+
+  <div class="diff-view" id="view-diff">
+    <h2>検出パターンと変更内容</h2>
+    <table class="diff-table">
+      <thead>
+        <tr>
+          <th>重要度</th>
+          <th>カテゴリ</th>
+          <th>Before（AIらしいパターン）</th>
+          <th>After（人間らしい代替）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="severity-high">● High</span></td>
+          <td>Color</td>
+          <td class="before-cell"><code>linear-gradient(to right, #7c3aed, #2563eb)</code><br>紫→青のグラジェント背景</td>
+          <td class="after-cell"><code>background: #ffffff; border-bottom: 1px solid #e0e0e0</code><br>白背景＋ボーダー</td>
+        </tr>
+        <tr>
+          <td><span class="severity-high">● High</span></td>
+          <td>Typography</td>
+          <td class="before-cell"><code>-webkit-background-clip: text</code><br>見出しへのグラジェントテキスト</td>
+          <td class="after-cell"><code>color: #1a1a1a; font-weight: 700</code><br>ハイコントラストの太字</td>
+        </tr>
+        <tr>
+          <td><span class="severity-high">● High</span></td>
+          <td>Component</td>
+          <td class="before-cell"><code>backdrop-filter: blur(10px); background: rgba(255,255,255,0.05)</code><br>ガラスモーフィズム</td>
+          <td class="after-cell"><code>background: #f8f8f8; border: 1px solid #e0e0e0</code><br>ソリッド背景＋ボーダー</td>
+        </tr>
+        <tr>
+          <td><span class="severity-high">● High</span></td>
+          <td>Layout</td>
+          <td class="before-cell"><code>grid-template-columns: repeat(3, 1fr)</code><br>3カラム均等グリッド</td>
+          <td class="after-cell"><code>grid-template-columns: 200px 1fr</code> + <code>&lt;table&gt;</code><br>非対称レイアウト＋テーブル形式</td>
+        </tr>
+        <tr>
+          <td><span class="severity-high">● High</span></td>
+          <td>CTA</td>
+          <td class="before-cell">"Get Started Free" / "Learn More"<br>汎用英語CTA</td>
+          <td class="after-cell">"14日間無料で試す" / "導入事例を見る →"<br>具体的なアクションテキスト</td>
+        </tr>
+        <tr>
+          <td><span class="severity-med">◐ Medium</span></td>
+          <td>Component</td>
+          <td class="before-cell"><code>border-radius: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.15)</code><br>過剰な角丸＋大きなシャドウ</td>
+          <td class="after-cell"><code>border-radius: 2px; border: 1px solid #e0e0e0</code><br>シャープな角＋細いボーダー</td>
+        </tr>
+        <tr>
+          <td><span class="severity-med">◐ Medium</span></td>
+          <td>Typography</td>
+          <td class="before-cell"><code>font-family: 'Inter', sans-serif</code><br>Interフォント一択</td>
+          <td class="after-cell"><code>font-family: 'Yu Gothic', ...; font-family: 'Yu Mincho', ...</code><br>ゴシック体＋明朝体の混在</td>
+        </tr>
+        <tr>
+          <td><span class="severity-med">◐ Medium</span></td>
+          <td>Typography</td>
+          <td class="before-cell"><code>font-size: 4.5rem</code><br>過大なヒーロー見出し</td>
+          <td class="after-cell"><code>font-size: 2.25rem</code><br>適切なサイズ（コンテンツで語る）</td>
+        </tr>
+        <tr>
+          <td><span class="severity-low">○ Low</span></td>
+          <td>Structure</td>
+          <td class="before-cell">Hero → 3 Feature Cards → "Trusted by" logos → CTA → Footer<br>テンプレート的なセクション順</td>
+          <td class="after-cell">Hero（左右非対称） → 導入実績（数値） → 機能表 → 料金（2列）<br>編集的な情報設計</td>
+        </tr>
+        <tr>
+          <td><span class="severity-low">○ Low</span></td>
+          <td>Color</td>
+          <td class="before-cell">紫・インディゴをメインカラーに多用<br>（ボタン・バッジ・グロー・グラジェント全て）</td>
+          <td class="after-cell"><code>#003a8c</code>（ネイビー）を1色のみ、ボタン・リンク・ラベルに限定</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function show(view) {
+      ['split', 'before', 'after', 'diff'].forEach(v => {
+        const el = document.getElementById('view-' + v);
+        el.classList.remove('active');
+      });
+      document.getElementById('view-' + view).classList.add('active');
+
+      document.querySelectorAll('.tab').forEach((t, i) => {
+        t.classList.remove('active');
+      });
+      const idx = ['split', 'before', 'after', 'diff'].indexOf(view);
+      document.querySelectorAll('.tab')[idx].classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
