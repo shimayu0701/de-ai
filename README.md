@@ -3,9 +3,9 @@
 > *Remove AI. Restore the human touch.*
 > *AIを取り除き、人間らしさを取り戻す。*
 
-**de-ai** is a CLI tool and Claude Code skill that detects and removes AI-generated design patterns from websites — with a focus on Japanese web aesthetics.
+**de-ai** is a CLI tool and Claude Code skill that detects AI-generated design patterns in websites and helps you build something genuinely human — rich in design quality, intentional in every detail, rooted in Japanese web aesthetics.
 
-**de-ai** はウェブサイトのAIらしいデザインパターンを検出・除去するCLIツール＋Claude Codeスキルです。日本のウェブデザイン美学に特化しています。
+**de-ai** はウェブサイトのAIらしいデザインパターンを検出するCLIツール＋Claude Codeスキルです。デザイン品質が高く、すべてに意図があり、日本のウェブデザイン美学に根ざしたサイトを作るためのガイドです。
 
 ---
 
@@ -22,9 +22,9 @@ Vibe-coded websites all look the same:
 - Inter font only / Interフォント一択
 - Gradient clip-text on headings / 見出しのグラジェントテキスト
 
-**de-ai** detects these patterns and suggests human, intentional alternatives — especially those rooted in Japanese web design traditions.
+The solution isn't "simpler." It's *more intentional.*
 
-**de-ai** はこれらのパターンを検出し、人間的で意図的な代替案を提案します。
+解決策は「よりシンプルに」ではない。「より意図的に」だ。
 
 ---
 
@@ -115,23 +115,64 @@ npm install --save-dev @de-ai/cli
 @node_modules/@de-ai/cli/skill.md
 ```
 
-Or copy `skill.md` directly into your project and reference it:
+Or download `skill.md` directly:
 
-またはリポジトリから `skill.md` を直接ダウンロードして参照することもできます：
+またはリポジトリから直接ダウンロードして参照することもできます：
 
 ```bash
 curl -o de-ai-skill.md https://raw.githubusercontent.com/shimayu0701/de-ai/main/skill.md
 # Then add to CLAUDE.md: @de-ai-skill.md
 ```
 
-The skill covers: / スキルのカバー範囲:
-- Color rules (no purple gradients) / カラールール
-- Typography (Gothic + Mincho mixing) / タイポグラフィ
-- Layout (asymmetric over 3-col grids) / レイアウト
-- Component rules (borders over shadows) / コンポーネント
-- Motion (restrained, interactive only) / モーション
-- CTA text (specific over generic) / CTAテキスト
-- Pre-flight checklist / 完成前チェックリスト
+### What the skill covers / スキルのカバー範囲
+
+- **3 foundational questions** before any design decision / デザイン前の3つの問い
+- **Color** — intentional palettes, not AI defaults / 意図的なカラーパレット
+- **Typography** — serif + sans-serif contrast, Japanese font stacks / 明朝＋ゴシックのコントラスト
+- **Layout** — asymmetric, magazine-style, information-hierarchy-driven / 非対称・マガジン風
+- **Components** — accent borders, subtle shadows, flat buttons / アクセントボーダー・フラットボタン
+- **Motion** — hover/focus only, no scroll-triggered animations / ホバー・フォーカスのみ
+- **Structure** — editorial section order, not template order / 編集的なセクション構成
+- **Richness techniques** — layered backgrounds, typographic hierarchy / 重なる背景・タイポグラフィ階層
+- **Dual checklist** — AI removal + human confirmation / AIらしさ排除＋人間らしさ確認
+
+---
+
+## Genre Skills / ジャンル別スキル
+
+For genre-specific guidance, load the base skill plus the genre file:
+
+ジャンル固有のガイダンスは、ベーススキルにジャンルファイルを追加して読み込みます：
+
+```bash
+# Example: Restaurant site / 飲食店サイトの場合
+# Add to CLAUDE.md:
+@node_modules/@de-ai/cli/skill.md
+@node_modules/@de-ai/cli/skills/food.md
+```
+
+| Genre / ジャンル | File |
+|-----------------|------|
+| 飲食・食 | `skills/food.md` |
+| 医療・健康・美容 | `skills/health-beauty.md` |
+| 宿泊・旅行・レジャー | `skills/travel-leisure.md` |
+| 教育 | `skills/education.md` |
+| ビジネス・BtoB | `skills/business-b2b.md` |
+| 不動産・建設 | `skills/realestate.md` |
+| 士業・金融・保険 | `skills/legal-finance.md` |
+| ライフスタイル | `skills/lifestyle.md` |
+| メディア・クリエイター | `skills/media-creator.md` |
+| 公共・社会 | `skills/public-social.md` |
+| 小売・EC | `skills/retail-ec.md` |
+
+Each genre skill includes / 各ジャンルスキルの内容:
+- Core principle for that genre / ジャンルの核心原則
+- Recommended color palettes / 推奨カラーパレット
+- Typography guidance / タイポグラフィ指針
+- Layout patterns / レイアウトパターン
+- Must-have sections / 必須セクション
+- CTA text examples / CTAテキスト例
+- What to avoid / 避けること
 
 ---
 
@@ -155,30 +196,34 @@ The skill covers: / スキルのカバー範囲:
 
 ---
 
-## Japanese Design Principles / 日本のデザイン原則
+## Design Philosophy / デザイン哲学
 
-de-ai's suggestions are based on observed patterns in trusted Japanese websites:
+de-ai's suggestions are grounded in intentional design — not just removal of AI patterns:
 
-| AI Default | Japanese Alternative |
-|-----------|---------------------|
-| Purple gradient | White + `border-bottom: 1px solid` |
-| 3 equal cards | Asymmetric grid / `<table>` / `<dl>` |
-| `rounded-2xl shadow-xl` | `border: 1px solid #DDD` |
-| Inter only | Yu Gothic + Yu Mincho mix |
-| "Get Started" | Specific action (e.g. "資料をダウンロード") |
-| Scroll animations | Hover/focus transitions only (150ms) |
+| AI Default | Human Alternative |
+|-----------|-------------------|
+| Purple gradient hero | Layered section backgrounds with rhythm |
+| Gradient clip-text | Serif heading + high contrast |
+| 3 equal cards | Asymmetric / magazine / alternating layout |
+| `rounded-2xl shadow-xl` | `border-left: 3px + shadow-sm` |
+| Pill-shaped gradient button | Flat button, 4px radius |
+| Inter only | Noto Sans (body) + Noto Serif (heading) |
+| "Get Started" | Specific action verb with context |
+| Scroll-triggered animation | Hover/focus only (150ms) |
+| All-white sections | Background color rhythm per section |
 
 ---
 
 ## Contributing / コントリビュート
 
-Pattern suggestions and Japanese design knowledge welcome!
+Pattern suggestions, genre knowledge, and design principles are all welcome!
 
-パターンの追加提案・日本のデザイン知識の共有を歓迎します！
+パターンの追加提案・ジャンル知識・デザイン原則の共有を歓迎します！
 
 1. Edit `rules/ai-patterns.json` to add detection patterns
 2. Edit `rules/jp-design.json` to add design principles
-3. Open a PR with examples
+3. Add or improve a genre skill in `skills/`
+4. Open a PR with before/after examples
 
 ---
 
