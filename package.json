@@ -1,6 +1,6 @@
 {
   "name": "@de-ai/cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Remove AI-generated look from websites. Restore human touch. / AIらしさを除去して、人間らしいウェブを取り戻す。",
   "bin": {
     "de-ai": "dist/index.js"
